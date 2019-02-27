@@ -1,19 +1,17 @@
 package com.example.homedroid2.models
 
 import org.simpleframework.xml.Element
+import org.simpleframework.xml.Root
 
-@Element(name = "work")
-public class Book {
-
-    @Element(name = "best_book")
+@Root(name = "work", strict = false)
+data class Book (
+    @field:Element(name = "id")
+    @param:Element(name = "id")
+    var id: Int? = null,
+    @field:Element(name = "average_rating")
+    @param:Element(name = "average_rating")
+    var average_rating: String? = null,
+    @field:Element(name = "best_book")
+    @param:Element(name = "best_book")
     var best_book: BestBook? = null
-
-    inner class BestBook {
-
-        @Element(name = "title")
-        var title: String? = null
-
-        @Element(name = "image_url")
-        var image_url: String? = null
-    }
-}
+)
