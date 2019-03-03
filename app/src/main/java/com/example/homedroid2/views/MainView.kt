@@ -50,9 +50,9 @@ class MainView : AppCompatActivity(), DataAdapter.BooksViewHolder.OnBookClick {
         Toast.makeText(this, "Error ${error.localizedMessage}", Toast.LENGTH_SHORT).show()
     }
 
-    internal fun handleResponse(dataModel: DataModel) {
+    internal fun handleResponse(dataModel: DataModel?) {
 
-        mBookArrayList = ArrayList(dataModel.search?.books)
+        mBookArrayList = ArrayList(dataModel?.search?.books)
         mAdapter = DataAdapter(mBookArrayList!!, this)
         rv_home_news.adapter = mAdapter
     }

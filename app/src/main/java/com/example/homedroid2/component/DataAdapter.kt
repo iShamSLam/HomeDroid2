@@ -1,4 +1,5 @@
 package com.example.homedroid2
+
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -7,6 +8,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.example.homedroid2.models.Book;
 import com.squareup.picasso.Picasso
+
 
 
 class DataAdapter constructor(val books: List<Book>, val onBookClick: BooksViewHolder.OnBookClick) :
@@ -27,11 +29,11 @@ class DataAdapter constructor(val books: List<Book>, val onBookClick: BooksViewH
         return books.size
     }
 
-    class BooksViewHolder(itemView: View?, val onBookClick: OnBookClick) : RecyclerView.ViewHolder(itemView!!) {
+    class BooksViewHolder(itemView: View?, val onBookClick: OnBookClick?) : RecyclerView.ViewHolder(itemView!!) {
         val titleTextView: TextView? = itemView?.findViewById(R.id.tv_book)
         val bookImageVIew: ImageView? = itemView?.findViewById(R.id.iv_wallpaper)
-        val bookRating : TextView? = itemView?.findViewById(R.id.tv_rating)
-        val author : TextView? = itemView?.findViewById(R.id.tv_author)
+        val bookRating: TextView? = itemView?.findViewById(R.id.tv_rating)
+        val author: TextView? = itemView?.findViewById(R.id.tv_author)
         fun bindBooks(books: Book) {
 
             titleTextView?.text = books.best_book?.title
@@ -39,7 +41,7 @@ class DataAdapter constructor(val books: List<Book>, val onBookClick: BooksViewH
             author?.text = books.best_book?.author?.name
             Picasso.get().load(books.best_book?.image_url).into(bookImageVIew)
             itemView.setOnClickListener {
-                onBookClick.OnBookClick(books)
+                onBookClick?.OnBookClick(books)
             }
         }
 
