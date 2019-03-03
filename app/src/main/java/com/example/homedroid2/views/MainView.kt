@@ -1,82 +1,69 @@
 package com.example.homedroid2.views
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.util.Log
+import android.widget.Toast
 import com.example.homedroid2.DataAdapter
+import com.example.homedroid2.R
 import com.example.homedroid2.models.Book
 import com.example.homedroid2.models.DataModel
-import com.example.homedroid2.models.GoodreadsApiService
+import com.example.homedroid2.presenter.MainPresenter
 import io.reactivex.disposables.CompositeDisposable
 import kotlinx.android.synthetic.main.activity_main.*
-import retrofit2.Retrofit
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
-import retrofit2.converter.simplexml.SimpleXmlConverterFactory
-import com.example.homedroid2.R
 
 
 class MainView : AppCompatActivity(), DataAdapter.BooksViewHolder.OnBookClick {
 
     private val TAG = MainView::class.java.simpleName
 
-    private val BASE_URL = "https://www.goodreads.com/"
-
-    private var result: DataModel? = DataModel()
-
-    private var mCompositeDisposable: CompositeDisposable? = null
+    internal var mCompositeDisposable: CompositeDisposable? = null
 
     private var mBookArrayList: ArrayList<Book>? = null
 
     private var mAdapter: DataAdapter? = null
+
+    private var presenter: MainPresenter? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         mCompositeDisposable = CompositeDisposable()
-
+        presenter = MainPresenter(this)
+        presenter?.loadXML()
         setupViews()
-
-        loadXML()
     }
 
     private fun setupViews() {
         rv_home_news.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
     }
 
-    private fun loadXML() {
-        val thread = Thread(Runnable {
-            try {
-                val requestInterface = Retrofit.Builder()
-                    .baseUrl(BASE_URL)
-                    .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                    .addConverterFactory(SimpleXmlConverterFactory.create())
-                    .build().create(GoodreadsApiService::class.java)
 
-                result = requestInterface.search("enter").execute().body()
-                runOnUiThread {
-                    handleResponse(result?.search?.books)
-                }
+    fun handleError(error: Throwable) {
 
-            } catch (e: Exception) {
-                e.printStackTrace()
-            }
-        })
+        Log.d(TAG, error.localizedMessage)
 
-        thread.start()
+        Toast.makeText(this, "Error ${error.localizedMessage}", Toast.LENGTH_SHORT).show()
     }
 
-    private fun handleResponse(bookList: List<Book>?) {
+    internal fun handleResponse(dataModel: DataModel) {
 
-        mBookArrayList = ArrayList(bookList)
+        mBookArrayList = ArrayList(dataModel.search?.books)
         mAdapter = DataAdapter(mBookArrayList!!, this)
-
         rv_home_news.adapter = mAdapter
     }
 
     override fun OnBookClick(books: Book) {
-
+        val intent = Intent(this, DetailsView::class.java)
+        intent.putExtra("title", books.best_book?.title)
+        intent.putExtra("author", books.best_book?.author?.name)
+        intent.putExtra("rate", books.average_rating)
+        intent.putExtra("url", books.best_book?.image_url)
+        startActivity(intent)
     }
 
     override fun onDestroy() {
