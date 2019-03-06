@@ -37,6 +37,8 @@ class MainActivity : MvpAppCompatActivity(), MainView, DataAdapter.BooksViewHold
         setContentView(R.layout.activity_main)
         setupViews()
 
+        mMainPresenter.createCache(cacheDir)
+
         observableFromSearchView(sv_main)
             .debounce(1, TimeUnit.SECONDS)
             .distinctUntilChanged()
@@ -75,10 +77,6 @@ class MainActivity : MvpAppCompatActivity(), MainView, DataAdapter.BooksViewHold
         intent.putExtra("rate", books.average_rating)
         intent.putExtra("url", books.best_book?.image_url)
         startActivity(intent)
-    }
-
-    override fun getCacheDir(): File {
-        return super.getCacheDir()
     }
 
     override fun onDestroy() {

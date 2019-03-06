@@ -20,7 +20,7 @@ import java.io.File
 @InjectViewState
 class MainPresenter() : MvpPresenter<MainView>() {
     private val BASE_URL = "https://www.goodreads.com/"
-
+    private lateinit var okHttpClient: OkHttpClient
 
     public override fun onFirstViewAttach() {
         super.onFirstViewAttach()
@@ -32,13 +32,6 @@ class MainPresenter() : MvpPresenter<MainView>() {
     }
 
     fun loadXML(query: String = "") {
-        val cacheSize : Long = 10 * 1024 * 1024 // 10 MB
-        val cache = Cache(viewState.getCacheDir(), cacheSize)
-
-        val okHttpClient = OkHttpClient.Builder()
-            .cache(cache)
-            .build()
-
         val requestInterface = Retrofit.Builder()
             .baseUrl(BASE_URL)
             .client(okHttpClient)
@@ -52,5 +45,14 @@ class MainPresenter() : MvpPresenter<MainView>() {
             .subscribeOn(Schedulers.io())
             .subscribe(viewState::handleResponse, viewState::handleError)
 //        )
+    }
+
+    fun createCache(file: File) {
+        val cacheSize : Long = 10 * 1024 * 1024 // 10 MB
+        val cache = Cache(file, cacheSize)
+
+        okHttpClient = OkHttpClient.Builder()
+            .cache(cache)
+            .build()
     }
 }
