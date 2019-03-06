@@ -4,6 +4,7 @@ apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'io.gitlab.arturbosch.detekt'
+apply plugin: 'kotlin-kapt'
 
 detekt {
     version = "1.0.0-RC12"
@@ -63,4 +64,7 @@ dependencies {
     implementation 'com.squareup.retrofit2:converter-simplexml:2.5.0'
     implementation 'com.android.support:cardview-v7:28.0.0'
     implementation 'com.android.support:design:28.0.0'
+    kapt 'com.arello-mobile:moxy-compiler:1.5.3'
+    implementation "com.arello-mobile:moxy:1.5.5"
+    implementation "com.arello-mobile:moxy-app-compat:1.5.5"
 }
