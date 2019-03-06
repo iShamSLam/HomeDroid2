@@ -5,7 +5,6 @@ import com.example.homedroid2.models.DataModel
 import java.io.File
 
 interface MainView : MvpView {
-    fun getCacheDir(): File;
     fun getBooks(query:String?)
     fun handleResponse(dataModel: DataModel?)
     fun handleError(error: Throwable)

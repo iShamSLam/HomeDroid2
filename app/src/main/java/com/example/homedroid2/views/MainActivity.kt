@@ -10,6 +10,7 @@ import com.arellomobile.mvp.MvpAppCompatActivity
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.example.homedroid2.DataAdapter
 import com.example.homedroid2.R
+import com.example.homedroid2.component.PaginationScrollListener
 import com.example.homedroid2.models.Book
 import com.example.homedroid2.models.DataModel
 import com.example.homedroid2.presenter.MainPresenter
@@ -17,7 +18,6 @@ import io.apptitude.premiumparking.utils.functions.observableFromSearchView
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
 import kotlinx.android.synthetic.main.activity_main.*
-import java.io.File
 import java.util.concurrent.TimeUnit
 
 
@@ -28,6 +28,9 @@ class MainActivity : MvpAppCompatActivity(), MainView, DataAdapter.BooksViewHold
     private var mBookArrayList: ArrayList<Book>? = null
 
     private var mAdapter: DataAdapter? = null
+    private var isLastPage: Boolean = false
+    private var isLoading: Boolean = false
+    private lateinit var currentSearchString: String
 
     @InjectPresenter
     lateinit var mMainPresenter: MainPresenter
@@ -36,20 +39,23 @@ class MainActivity : MvpAppCompatActivity(), MainView, DataAdapter.BooksViewHold
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setupViews()
-
+        setSearch()
         mMainPresenter.createCache(cacheDir)
+    }
 
+    override fun getBooks(query: String?) {
+        mMainPresenter.loadXML()
+    }
+
+    fun setSearch() {
         observableFromSearchView(sv_main)
             .debounce(1, TimeUnit.SECONDS)
             .distinctUntilChanged()
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(onNext = {
-                    mMainPresenter.loadXML(it)
+                currentSearchString = it
+                mMainPresenter.loadXML(currentSearchString)
             }, onError = {})
-    }
-
-    override fun getBooks(query: String?) {
-        mMainPresenter.loadXML()
     }
 
     override fun handleError(error: Throwable) {
@@ -63,6 +69,26 @@ class MainActivity : MvpAppCompatActivity(), MainView, DataAdapter.BooksViewHold
         rv_home_news.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
         mAdapter = DataAdapter(this)
         rv_home_news.adapter = mAdapter
+
+        var page = 1
+        rv_home_news?.addOnScrollListener(object :
+            PaginationScrollListener(rv_home_news.layoutManager as LinearLayoutManager) {
+            override fun isLastPage(): Boolean {
+                return isLastPage
+            }
+
+            override fun isLoading(): Boolean {
+                return isLoading
+            }
+
+            override fun loadMoreItems() {
+                isLoading = true
+                page++
+                mMainPresenter.loadXML(currentSearchString, page.toString())
+                isLoading = false
+            }
+        })
+
     }
 
     override fun handleResponse(dataModel: DataModel?) {

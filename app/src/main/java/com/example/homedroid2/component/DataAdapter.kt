@@ -10,11 +10,10 @@ import com.example.homedroid2.models.Book;
 import com.squareup.picasso.Picasso
 
 
-
-class DataAdapter (val onBookClick: BooksViewHolder.OnBookClick) :
+class DataAdapter(val onBookClick: BooksViewHolder.OnBookClick) :
     RecyclerView.Adapter<DataAdapter.BooksViewHolder>() {
 
-    private var books: List<Book> = ArrayList(0)
+    private var books: ArrayList<Book> = ArrayList(0)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BooksViewHolder {
         return BooksViewHolder(
@@ -31,9 +30,12 @@ class DataAdapter (val onBookClick: BooksViewHolder.OnBookClick) :
         return books.size
     }
 
-    fun updateDataSet(list: List<Book>) {
-        books = list
-        notifyDataSetChanged()
+    fun updateDataSet(list: ArrayList<Book>) {
+        var size = this.books.size
+        this.books.addAll(list)
+        var sizeNew = this.books.size
+        notifyItemRangeChanged(size, sizeNew)
+
     }
 
     class BooksViewHolder(itemView: View?, val onBookClick: OnBookClick?) : RecyclerView.ViewHolder(itemView!!) {

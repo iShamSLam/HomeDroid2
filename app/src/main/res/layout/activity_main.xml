@@ -34,11 +34,9 @@
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="8dp"
                     android:inputType="textAutoComplete"
+                    app:closeIcon="@drawable/ic_close"
+                    app:searchIcon="@drawable/ic_search"
                     app:iconifiedByDefault="false"/>
-            <!--app:closeIcon="@drawable/ic_close_cross_grey"-->
-            <!--app:queryHint="@string/search_hint"-->
-            <!--app:searchIcon="@drawable/ic_search_gray"-->
-
 
         </android.support.v7.widget.Toolbar>
 
