@@ -17,6 +17,7 @@ import io.apptitude.premiumparking.utils.functions.observableFromSearchView
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
 import kotlinx.android.synthetic.main.activity_main.*
+import java.io.File
 import java.util.concurrent.TimeUnit
 
 
@@ -74,6 +75,10 @@ class MainActivity : MvpAppCompatActivity(), MainView, DataAdapter.BooksViewHold
         intent.putExtra("rate", books.average_rating)
         intent.putExtra("url", books.best_book?.image_url)
         startActivity(intent)
+    }
+
+    override fun getCacheDir(): File {
+        return super.getCacheDir()
     }
 
     override fun onDestroy() {
