@@ -4,7 +4,7 @@ import org.simpleframework.xml.Element
 import org.simpleframework.xml.Root
 
 @Root(name = "work", strict = false)
-data class Book (
+data class Book(
     @field:Element(name = "id")
     @param:Element(name = "id")
     var id: Int? = null,

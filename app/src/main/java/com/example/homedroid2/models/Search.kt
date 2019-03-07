@@ -4,7 +4,7 @@ import org.simpleframework.xml.ElementList
 import org.simpleframework.xml.Root
 
 @Root(name = "search", strict = false)
-data class Search (
+data class Search(
 
     @field:ElementList(name = "results")
     @param:ElementList(name = "results")
