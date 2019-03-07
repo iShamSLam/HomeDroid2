@@ -7,6 +7,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.arellomobile.mvp.MvpAppCompatActivity
 import com.arellomobile.mvp.presenter.InjectPresenter
+import com.example.homedroid2.R
 import com.example.homedroid2.presenter.DetailsPresenter
 import com.squareup.picasso.Picasso
 
