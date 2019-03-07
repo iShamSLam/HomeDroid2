@@ -1,7 +1,6 @@
 package com.example.homedroid2.models
 
 import org.simpleframework.xml.Element
-import org.simpleframework.xml.ElementList
 import org.simpleframework.xml.Root
 
 @Root(name = "GoodreadsResponse")

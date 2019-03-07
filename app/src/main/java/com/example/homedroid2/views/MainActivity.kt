@@ -9,7 +9,6 @@ import android.widget.Toast
 import com.arellomobile.mvp.MvpAppCompatActivity
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.example.homedroid2.DataAdapter
-import com.example.homedroid2.R
 import com.example.homedroid2.component.PaginationScrollListener
 import com.example.homedroid2.models.Book
 import com.example.homedroid2.models.DataModel
