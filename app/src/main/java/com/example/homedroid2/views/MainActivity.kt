@@ -21,7 +21,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 import java.util.concurrent.TimeUnit
 
 
-class MainActivity : MvpAppCompatActivity(), MainView, DataAdapter.BooksViewHolder.OnBookClick {
+class MainActivity : MvpAppCompatActivity(), MainView {
 
     private val TAG = MainView::class.java.simpleName
 
@@ -67,7 +67,7 @@ class MainActivity : MvpAppCompatActivity(), MainView, DataAdapter.BooksViewHold
 
     private fun setupViews() {
         rv_home_news.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
-        mAdapter = DataAdapter(this)
+        mAdapter = DataAdapter { mMainPresenter.onBookClick(it) }
         rv_home_news.adapter = mAdapter
 
         var page = 1
@@ -96,7 +96,7 @@ class MainActivity : MvpAppCompatActivity(), MainView, DataAdapter.BooksViewHold
         mAdapter?.updateDataSet(mBookArrayList ?: ArrayList())
     }
 
-    override fun OnBookClick(books: Book) {
+    override fun navigateToDetailsView(books: Book) {
         val intent = Intent(this, DetailsView::class.java)
         intent.putExtra("title", books.best_book?.title)
         intent.putExtra("author", books.best_book?.author?.name)

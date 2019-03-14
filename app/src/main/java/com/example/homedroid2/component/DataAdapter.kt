@@ -10,20 +10,19 @@ import com.example.homedroid2.models.Book;
 import com.squareup.picasso.Picasso
 
 
-class DataAdapter(val onBookClick: BooksViewHolder.OnBookClick) :
+class DataAdapter(private val onBookClick: (Book) -> Unit) :
     RecyclerView.Adapter<DataAdapter.BooksViewHolder>() {
 
     private var books: ArrayList<Book> = ArrayList(0)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BooksViewHolder {
         return BooksViewHolder(
-            LayoutInflater.from(parent.context).inflate(R.layout.recycler_view_item_1, parent, false),
-            onBookClick
+            LayoutInflater.from(parent.context).inflate(R.layout.recycler_view_item_1, parent, false)
         )
     }
 
     override fun onBindViewHolder(holder: BooksViewHolder, position: Int) {
-        holder.bindBooks(books[position])
+        holder.bindBooks(books[position], onBookClick)
     }
 
     override fun getItemCount(): Int {
@@ -38,24 +37,20 @@ class DataAdapter(val onBookClick: BooksViewHolder.OnBookClick) :
 
     }
 
-    class BooksViewHolder(itemView: View?, val onBookClick: OnBookClick?) : RecyclerView.ViewHolder(itemView!!) {
-        val titleTextView: TextView? = itemView?.findViewById(R.id.tv_book)
+    class BooksViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val titleTextView: TextView? = itemView.findViewById(R.id.tv_book)
         val bookImageVIew: ImageView? = itemView?.findViewById(R.id.iv_wallpaper)
         val bookRating: TextView? = itemView?.findViewById(R.id.tv_rating)
         val author: TextView? = itemView?.findViewById(R.id.tv_author)
-        fun bindBooks(books: Book) {
+        fun bindBooks(books: Book, onBookClick: (Book) -> Unit) {
 
             titleTextView?.text = books.best_book?.title
             bookRating?.text = books.average_rating
             author?.text = books.best_book?.author?.name
             Picasso.get().load(books.best_book?.image_url).into(bookImageVIew)
             itemView.setOnClickListener {
-                onBookClick?.OnBookClick(books)
+                onBookClick.invoke(books)
             }
-        }
-
-        interface OnBookClick {
-            fun OnBookClick(books: Book)
         }
     }
 }

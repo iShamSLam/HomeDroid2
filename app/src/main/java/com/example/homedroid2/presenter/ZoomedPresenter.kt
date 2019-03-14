@@ -6,7 +6,5 @@ import com.example.homedroid2.views.ZoomedView
 
 @InjectViewState
 class ZoomedPresenter : MvpPresenter<ZoomedView>() {
-    fun showImage(url: String) {
-        viewState.showImage(url)
-    }
+    fun showImage(url: String) = viewState.showImage(url)
 }

@@ -4,6 +4,7 @@ package com.example.homedroid2.presenter
 
 import com.arellomobile.mvp.InjectViewState
 import com.arellomobile.mvp.MvpPresenter
+import com.example.homedroid2.models.Book
 import com.example.homedroid2.models.GoodreadsApiService
 import com.example.homedroid2.views.MainView
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -18,7 +19,7 @@ import java.io.File
 
 
 @InjectViewState
-class MainPresenter() : MvpPresenter<MainView>() {
+class MainPresenter : MvpPresenter<MainView>() {
     private val BASE_URL = "https://www.goodreads.com/"
     private lateinit var okHttpClient: OkHttpClient
     private var mCompositeDisposable: CompositeDisposable? = CompositeDisposable()
@@ -34,6 +35,8 @@ class MainPresenter() : MvpPresenter<MainView>() {
         super.onDestroy()
         mCompositeDisposable?.clear()
     }
+
+    fun onBookClick(book: Book) = viewState.navigateToDetailsView(book)
 
     fun buildRequest() {
         requestInterface = Retrofit.Builder()
