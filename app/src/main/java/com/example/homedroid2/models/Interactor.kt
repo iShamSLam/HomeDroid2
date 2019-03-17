@@ -26,6 +26,6 @@ class Interactor {
 
     companion object {
         private val BASE_URL = "https://www.goodreads.com/"
-        private lateinit var okHttpClient: OkHttpClient
+        private  var okHttpClient: OkHttpClient = OkHttpClient()
     }
 }
