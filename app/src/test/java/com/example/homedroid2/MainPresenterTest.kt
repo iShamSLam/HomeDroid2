@@ -13,6 +13,8 @@ import org.mockito.MockitoAnnotations
 
 
 class MainPresenterTest {
+
+    @Mock
     private lateinit var presenter: MainPresenter
     @Mock
     private lateinit var view: MainView
