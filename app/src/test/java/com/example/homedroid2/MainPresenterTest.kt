@@ -31,25 +31,18 @@ class MainPresenterTest {
     fun onItemClick() {
         val book = Mockito.mock(Book::class.java)
         presenter.onBookClick(book)
-        Mockito.verify<Any>(view.navigateToDetailsView(book))
+        Mockito.verify(view).navigateToDetailsView(book)
     }
 
     @Test
     @Throws(Exception::class)
     fun onFirstViewAttach() {
-        Mockito.doNothing().`when`<Any>(presenter.loadXML())
         presenter.onFirstViewAttach()
-        Mockito.verify<Any>(presenter.loadXML())
+        Mockito.verify(presenter).loadXML()
     }
 
     @Test
     fun testLoadXml() {
-        verify(view).getBooks(testString)
-    }
-
-    @Test
-    @Throws(Exception::class)
-    fun doActionInView() {
-        Mockito.verifyNoMoreInteractions(view)
+        Mockito.verify(presenter).loadXML(testString)
     }
 }
