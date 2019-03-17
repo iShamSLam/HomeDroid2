@@ -1,4 +1,4 @@
-package com.example.homedroid2.views
+package com.example.homedroid2.Activities
 
 import android.content.Intent
 import android.os.Bundle
@@ -14,12 +14,13 @@ import com.example.homedroid2.component.PaginationScrollListener
 import com.example.homedroid2.models.Book
 import com.example.homedroid2.models.DataModel
 import com.example.homedroid2.presenter.MainPresenter
+import com.example.homedroid2.views.DetailsView
+import com.example.homedroid2.views.MainView
 import io.apptitude.premiumparking.utils.functions.observableFromSearchView
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.concurrent.TimeUnit
-
 
 class MainActivity : MvpAppCompatActivity(), MainView {
 

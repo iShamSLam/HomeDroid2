@@ -9,7 +9,6 @@ import android.widget.TextView
 import com.example.homedroid2.models.Book;
 import com.squareup.picasso.Picasso
 
-
 class DataAdapter(private val onBookClick: (Book) -> Unit) :
     RecyclerView.Adapter<DataAdapter.BooksViewHolder>() {
 
@@ -25,9 +24,7 @@ class DataAdapter(private val onBookClick: (Book) -> Unit) :
         holder.bindBooks(books[position], onBookClick)
     }
 
-    override fun getItemCount(): Int {
-        return books.size
-    }
+    override fun getItemCount(): Int = books.size
 
     fun updateDataSet(list: ArrayList<Book>) {
         var size = this.books.size

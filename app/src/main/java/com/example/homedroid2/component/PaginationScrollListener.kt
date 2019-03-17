@@ -3,7 +3,6 @@ package com.example.homedroid2.component
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 
-
 abstract class PaginationScrollListener
     (var layoutManager: LinearLayoutManager) : RecyclerView.OnScrollListener() {
 

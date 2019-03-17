@@ -1,4 +1,4 @@
-package com.example.homedroid2.views
+package com.example.homedroid2.Activities
 
 import android.content.Intent
 import android.os.Bundle
@@ -9,6 +9,7 @@ import com.arellomobile.mvp.MvpAppCompatActivity
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.example.homedroid2.R
 import com.example.homedroid2.presenter.DetailsPresenter
+import com.example.homedroid2.views.DetailsView
 import com.squareup.picasso.Picasso
 
 class DetailsActivity : MvpAppCompatActivity(), DetailsView {
