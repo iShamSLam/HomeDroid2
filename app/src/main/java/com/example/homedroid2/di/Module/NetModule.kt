@@ -21,11 +21,6 @@ class NetModule {
 
     @Provides
     @Singleton
-    @Named(NAME_BASE_URL)
-    fun provideBaseUrlString(): String = "https://www.goodreads.com/"
-
-    @Provides
-    @Singleton
     fun provideGsonConverterFactory(): GsonConverterFactory =
         GsonConverterFactory.create()
 
@@ -50,6 +45,6 @@ class NetModule {
             .build()
 
     companion object {
-        private const val NAME_BASE_URL = "BaseURL"
+        private const val NAME_BASE_URL = "https://www.goodreads.com/"
     }
 }
