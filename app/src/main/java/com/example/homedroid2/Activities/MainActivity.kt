@@ -21,13 +21,13 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.concurrent.TimeUnit
+import javax.inject.Inject
 
 class MainActivity : MvpAppCompatActivity(), MainView {
 
     private val TAG = MainView::class.java.simpleName
 
     private var mBookArrayList: ArrayList<Book>? = null
-
     private var mAdapter: DataAdapter? = null
     private var isLastPage: Boolean = false
     private var isLoading: Boolean = false

@@ -27,11 +27,6 @@ class DetailsActivity : MvpAppCompatActivity(), DetailsView {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_details)
 
-        tvTitle = findViewById(R.id.tv_dtitle)
-        tvAuthor = findViewById(R.id.tv_dauthor)
-        tvRate = findViewById(R.id.tv_drate)
-        ivPhoto = findViewById(R.id.iv_dphoto)
-
         val intent: Intent = getIntent()
         val title = intent.getStringExtra("title")
         val author = intent.getStringExtra("author")
