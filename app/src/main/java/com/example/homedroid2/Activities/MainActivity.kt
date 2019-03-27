@@ -1,7 +1,8 @@
-package com.example.homedroid2
+package com.example.homedroid2.Activities
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import com.example.homedroid2.R
 
 class MainActivity : AppCompatActivity() {
 
