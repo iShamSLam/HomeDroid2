@@ -1,18 +1,16 @@
 package com.example.homedroid2.DI
 
+import com.example.homedroid2.UI
 import dagger.Component
-import shgbievi.gmail.com.jobsapp.di.modules.NetModule
-import shgbievi.gmail.com.jobsapp.ui.jobs.JobViewModel
-import shgbievi.gmail.com.jobsapp.ui.jobsList.JobsListViewModel
 import javax.inject.Singleton
 
 @Singleton
 @Component(modules = [(NetModule::class)])
 interface ViewModelInjector {
 
-    fun inject(jobsListViewModel: JobsListViewModel)
+    fun inject(ListViewModel: RecViewModel)
 
-    fun inject(jobViewModel: JobViewModel)
+    fun inject(ViewModel: MealViewModel)
 
     @Component.Builder
     interface Builder {

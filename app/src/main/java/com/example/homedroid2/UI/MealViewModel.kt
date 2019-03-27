@@ -7,6 +7,8 @@ import android.os.Build
 import android.support.annotation.RequiresApi
 import android.view.View
 import android.widget.TextView
+import com.example.homedroid2.Activities.DescActivity
+import com.example.homedroid2.Components.getParentActivity
 import com.example.homedroid2.model.Meals.Meal
 
 class JobViewModel : BaseViewModel() {
@@ -14,10 +16,6 @@ class JobViewModel : BaseViewModel() {
     private val jobTitle = MutableLiveData<String>()
     private val jobBody = MutableLiveData<String>()
 
-    fun bind(job: Meal) {
-        jobTitle.value = job.title
-        jobBody.value = job.description
-    }
 
     fun getJobTitle() = jobTitle
 

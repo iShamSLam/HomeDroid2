@@ -9,8 +9,8 @@ import shgbievi.gmail.com.jobsapp.ui.jobsList.JobsListViewModel
 class ViewModelFactory(private val activity: AppCompatActivity) : ViewModelProvider.Factory {
 
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(JobsListViewModel::class.java)) {
-            return JobsListViewModel() as T
+        if (modelClass.isAssignableFrom(RecViewModel::class.java)) {
+            return RecViewModel() as T
         }
         if (modelClass.isAssignableFrom(JobViewModel::class.java)) {
             return JobViewModel() as T
