@@ -21,4 +21,5 @@ class BookModule {
 
     @Provides
     fun provideDetails(): DetailsPresenter = DetailsPresenter()
+
 }
