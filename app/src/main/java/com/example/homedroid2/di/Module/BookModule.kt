@@ -1,11 +1,14 @@
 package com.example.homedroid2.di.Module
 
 import com.example.homedroid2.DataAdapter
+import com.example.homedroid2.component.PaginationScrollListener
 import com.example.homedroid2.presenter.DetailsPresenter
 import com.example.homedroid2.presenter.MainPresenter
 import com.example.homedroid2.presenter.ZoomedPresenter
 import dagger.Module
 import dagger.Provides
+import ru.terrakok.cicerone.Router
+import javax.inject.Inject
 
 @Module
 class BookModule {
@@ -21,4 +24,5 @@ class BookModule {
 
     @Provides
     fun provideDetails(): DetailsPresenter = DetailsPresenter()
+
 }

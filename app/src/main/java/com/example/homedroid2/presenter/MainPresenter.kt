@@ -12,16 +12,20 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import okhttp3.Cache
 import okhttp3.OkHttpClient
+import ru.terrakok.cicerone.Router
 import java.io.File
 
 @InjectViewState
 class MainPresenter : MvpPresenter<MainView>() {
+
     private val interactor: Interactor = Interactor()
     private var mCompositeDisposable: CompositeDisposable? = CompositeDisposable()
+    private lateinit var router: Router
 
 
     public override fun onFirstViewAttach() {
         super.onFirstViewAttach()
+        router = viewState.shareRouter()
         loadXML()
     }
 
@@ -30,7 +34,7 @@ class MainPresenter : MvpPresenter<MainView>() {
         mCompositeDisposable?.clear()
     }
 
-    fun onBookClick(book: Book) = viewState.navigateToDetailsView(book)
+    fun onBookClick(book: Book) = router.navigateTo(com.example.homedroid2.Screen.DetailsScreen())
 
 
     fun loadXML(query: String = "", page: String = "1") {
@@ -49,5 +53,9 @@ class MainPresenter : MvpPresenter<MainView>() {
         client = OkHttpClient.Builder()
             .cache(cache)
             .build()
+    }
+
+    fun onBackPressed() {
+        router.exit()
     }
 }
