@@ -1,9 +1,7 @@
 package com.example.homedroid2.views
 
 import com.arellomobile.mvp.MvpView
-import com.example.homedroid2.models.Book
 import com.example.homedroid2.models.DataModel
-import ru.terrakok.cicerone.Router
 
 interface MainView : MvpView, BaseView {
     fun getBooks(query: String?)

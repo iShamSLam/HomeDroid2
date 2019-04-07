@@ -1,13 +1,11 @@
 package com.example.homedroid2.di.Module
 
-import javax.inject.Singleton
-
 import dagger.Module
 import dagger.Provides
 import ru.terrakok.cicerone.Cicerone
 import ru.terrakok.cicerone.NavigatorHolder
 import ru.terrakok.cicerone.Router
-
+import javax.inject.Singleton
 
 @Module
 class NavigationModule {
@@ -19,13 +17,9 @@ class NavigationModule {
 
     @Provides
     @Singleton
-    internal fun provideRouter(): Router {
-        return cicerone.router
-    }
+    internal fun provideRouter(): Router = cicerone.router
 
     @Provides
     @Singleton
-    internal fun provideNavigatorHolder(): NavigatorHolder {
-        return cicerone.navigatorHolder
-    }
+    internal fun provideNavigatorHolder(): NavigatorHolder = cicerone.navigatorHolder
 }

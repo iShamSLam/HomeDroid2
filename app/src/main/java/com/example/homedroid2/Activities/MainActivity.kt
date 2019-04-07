@@ -1,6 +1,5 @@
 package com.example.homedroid2.Activities
 
-import android.content.Intent
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
@@ -15,7 +14,6 @@ import com.example.homedroid2.component.PaginationScrollListener
 import com.example.homedroid2.models.Book
 import com.example.homedroid2.models.DataModel
 import com.example.homedroid2.presenter.MainPresenter
-import com.example.homedroid2.views.DetailsView
 import com.example.homedroid2.views.MainView
 import io.apptitude.premiumparking.utils.functions.observableFromSearchView
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -28,14 +26,11 @@ import ru.terrakok.cicerone.commands.Command
 import ru.terrakok.cicerone.commands.Replace
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
-import android.R
-
-
 
 class MainActivity : MvpAppCompatActivity(), MainView {
 
     @Inject
-    public lateinit var router: Router
+    lateinit var router: Router
 
     @Inject
     lateinit var navigatorHolder: NavigatorHolder
@@ -82,10 +77,7 @@ class MainActivity : MvpAppCompatActivity(), MainView {
             }, onError = {})
     }
 
-    override fun shareRouter(): Router
-    {
-        return router
-    }
+    override fun shareRouter(): Router = router
 
     override fun handleError(error: Throwable) {
 

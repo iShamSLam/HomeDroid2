@@ -8,21 +8,15 @@ import com.example.homedroid2.Activities.ZoomedActivity
 import ru.terrakok.cicerone.android.support.SupportAppScreen
 
 class Screen {
-    public final class MainScreen : SupportAppScreen() {
-        override fun getActivityIntent(context: Context): Intent {
-            return Intent(context, MainActivity::class.java)
-        }
+    class MainScreen : SupportAppScreen() {
+        override fun getActivityIntent(context: Context): Intent = Intent(context, MainActivity::class.java)
     }
 
-    public final class DetailsScreen : SupportAppScreen() {
-        override fun getActivityIntent(context: Context): Intent {
-            return Intent(context, DetailsActivity::class.java)
-        }
+    class DetailsScreen : SupportAppScreen() {
+        override fun getActivityIntent(context: Context): Intent = Intent(context, DetailsActivity::class.java)
     }
 
-    public final class ZoomScreen : SupportAppScreen() {
-        override fun getActivityIntent(context: Context): Intent {
-            return Intent(context, ZoomedActivity::class.java)
-        }
+    class ZoomScreen : SupportAppScreen() {
+        override fun getActivityIntent(context: Context): Intent = Intent(context, ZoomedActivity::class.java)
     }
 }

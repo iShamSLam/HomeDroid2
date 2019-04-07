@@ -25,7 +25,7 @@ class DetailsActivity : MvpAppCompatActivity(), DetailsView {
     lateinit var mDetailsPresenter: DetailsPresenter
 
     @Inject
-    public lateinit var router: Router
+    lateinit var router: Router
 
     @Inject
     lateinit var navigatorHolder: NavigatorHolder
@@ -74,10 +74,7 @@ class DetailsActivity : MvpAppCompatActivity(), DetailsView {
         super.onPause()
     }
 
-    override fun shareRouter(): Router {
-        return router
-    }
-
+    override fun shareRouter(): Router = router
     override fun onResumeFragments() {
         super.onResumeFragments()
         navigatorHolder.setNavigator(navigator)
